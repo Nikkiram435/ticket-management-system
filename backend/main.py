@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
+from pathlib import Path
 
 from database import engine, Base, get_db
 import models
@@ -45,12 +47,13 @@ app.add_middleware(
 
 
 # ==========================================
-# HOME / HEALTH CHECK
+# HEALTH CHECK
 # ==========================================
 
-@app.get("/")
-def home():
+@app.get("/api/health")
+def health_check():
     return {
+        "status": "healthy",
         "message": "DataStraw Support CRM API is running"
     }
 
@@ -146,3 +149,18 @@ def update_ticket(
         "success": True,
         "updated_at": updated_ticket.updated_at
     }
+
+
+# ==========================================
+# SERVE FRONTEND
+# ==========================================
+BASE_DIR = Path(__file__).resolve().parent
+
+app.mount(
+    "/",
+    StaticFiles(
+        directory=BASE_DIR.parent / "frontend",
+        html=True
+    ),
+    name="frontend"
+)
