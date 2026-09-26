@@ -14,18 +14,12 @@ from schemas import (
     TicketDetailResponse
 )
 
-
-# ==========================================
 # CREATE DATABASE TABLES
-# ==========================================
 
 Base.metadata.create_all(bind=engine)
 
 
-# ==========================================
 # CREATE FASTAPI APP
-# ==========================================
-
 app = FastAPI(
     title="DataStraw Support CRM",
     description="Customer Support Ticketing CRM API",
@@ -33,9 +27,7 @@ app = FastAPI(
 )
 
 
-# ==========================================
 # CORS
-# ==========================================
 
 app.add_middleware(
     CORSMiddleware,
@@ -46,9 +38,7 @@ app.add_middleware(
 )
 
 
-# ==========================================
 # HEALTH CHECK
-# ==========================================
 
 @app.get("/api/health")
 def health_check():
@@ -57,10 +47,7 @@ def health_check():
         "message": "DataStraw Support CRM API is running"
     }
 
-
-# ==========================================
 # 1. CREATE TICKET
-# ==========================================
 
 @app.post("/api/tickets")
 def create_ticket(
@@ -75,9 +62,8 @@ def create_ticket(
     }
 
 
-# ==========================================
 # 2. GET ALL TICKETS
-# ==========================================
+
 
 @app.get(
     "/api/tickets",
@@ -97,9 +83,8 @@ def get_tickets(
     return tickets
 
 
-# ==========================================
 # 3. GET SINGLE TICKET
-# ==========================================
+
 
 @app.get(
     "/api/tickets/{ticket_id}",
@@ -123,9 +108,7 @@ def get_ticket(
     return ticket
 
 
-# ==========================================
 # 4. UPDATE TICKET
-# ==========================================
 
 @app.put("/api/tickets/{ticket_id}")
 def update_ticket(
@@ -151,9 +134,7 @@ def update_ticket(
     }
 
 
-# ==========================================
 # SERVE FRONTEND
-# ==========================================
 BASE_DIR = Path(__file__).resolve().parent
 
 app.mount(
