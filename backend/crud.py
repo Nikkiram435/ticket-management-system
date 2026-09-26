@@ -4,10 +4,8 @@ from sqlalchemy import or_
 from models import Ticket, Note
 from schemas import TicketCreate, TicketUpdate
 
-
-# ==========================================
 # 1. CREATE TICKET
-# ==========================================
+
 
 def create_ticket(db: Session, ticket_data: TicketCreate):
 
@@ -38,9 +36,7 @@ def create_ticket(db: Session, ticket_data: TicketCreate):
     return new_ticket
 
 
-# ==========================================
 # 2. GET ALL TICKETS
-# ==========================================
 
 def get_tickets(
     db: Session,
@@ -77,9 +73,7 @@ def get_tickets(
     return tickets
 
 
-# ==========================================
 # 3. GET SINGLE TICKET
-# ==========================================
 
 def get_ticket_by_id(
     db: Session,
@@ -93,9 +87,7 @@ def get_ticket_by_id(
     return ticket
 
 
-# ==========================================
 # 4. UPDATE TICKET
-# ==========================================
 
 def update_ticket(
     db: Session,
