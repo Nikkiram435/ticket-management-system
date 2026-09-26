@@ -345,7 +345,7 @@ Tested operations include:
 
 ## 📸 Screenshots
 
-![alt text](image.png)
+
 
 ### Dashboard
 
