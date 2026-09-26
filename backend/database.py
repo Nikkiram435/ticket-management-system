@@ -5,9 +5,11 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 # Use PostgreSQL on Railway (DATABASE_URL env var), fallback to SQLite for local development
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./crm.db")
 
-# Railway/Postgres URLs sometimes start with "postgres://" but SQLAlchemy needs "postgresql://"
+# Force psycopg2 driver for PostgreSQL (avoids trying psycopg v3 which isn't installed)
 if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
+elif DATABASE_URL.startswith("postgresql://") and not DATABASE_URL.startswith("postgresql+"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 
 # Create database engine
 if DATABASE_URL.startswith("sqlite"):
