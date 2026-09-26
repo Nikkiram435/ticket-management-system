@@ -4,6 +4,8 @@ A full-stack **Customer Support Ticketing CRM System** built as part of the **Da
 
 The application allows support teams to create, manage, search, filter, and update customer support tickets through a clean and responsive web interface.
 
+🔗 **Live Demo:** https://ticket-management-system-production-34bf.up.railway.app
+
 ---
 
 ## 🚀 Features
@@ -61,7 +63,7 @@ The dashboard displays:
 * FastAPI
 * SQLAlchemy
 * Pydantic
-* SQLite
+* PostgreSQL (production) / SQLite (local)
 
 ### Frontend
 
@@ -75,6 +77,7 @@ The dashboard displays:
 * VS Code
 * Git
 * GitHub
+* Railway (deployment)
 * FastAPI Swagger UI
 
 ---
@@ -98,19 +101,19 @@ datastraw-support-crm/
 │
 ├── .gitignore
 ├── README.md
-└── venv/             t
+└── venv/
 ```
 
 ---
 
 ## 🗄️ Database Design
 
-The application uses **SQLite** with two tables.
+The application uses **PostgreSQL in production** and **SQLite for local development**, with two tables.
 
 ### Tickets
 
 | Field          | Type     | Description                 |
-| -------------- | -------- | --------------------------- |
+| -------------- | -------- | ---------------------------- |
 | id             | Integer  | Primary key                 |
 | ticket_id      | String   | Unique ticket ID            |
 | customer_name  | String   | Customer name               |
@@ -124,7 +127,7 @@ The application uses **SQLite** with two tables.
 ### Notes
 
 | Field      | Type     | Description                     |
-| ---------- | -------- | ------------------------------- |
+| ---------- | -------- | -------------------------------- |
 | id         | Integer  | Primary key                     |
 | ticket_id  | Integer  | Foreign key referencing Tickets |
 | note_text  | Text     | Support note/comment            |
@@ -173,22 +176,10 @@ Optional query parameters:
 ?search=Rahul
 ```
 
-Example:
-
-```http
-GET /api/tickets?status=Open&search=Rahul
-```
-
 ### 3. Get Ticket Details
 
 ```http
 GET /api/tickets/{ticket_id}
-```
-
-Example:
-
-```http
-GET /api/tickets/TKT-001
 ```
 
 Returns complete ticket information including notes.
@@ -225,11 +216,6 @@ Response:
 
 ```bash
 git clone https://github.com/Nikkiram435/ticket-management-system.git
-```
-
-Move into the project:
-
-```bash
 cd ticket-management-system
 ```
 
@@ -237,43 +223,25 @@ cd ticket-management-system
 
 ```bash
 python -m venv venv
-```
-
-Activate it on Windows:
-
-```bash
 venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
 
 ```bash
-pip install fastapi uvicorn sqlalchemy pydantic email-validator
+pip install fastapi uvicorn sqlalchemy pydantic email-validator psycopg2-binary
 ```
 
 ### 4. Start the Backend
 
-Move into the backend directory:
-
 ```bash
 cd backend
-```
-
-Run FastAPI:
-
-```bash
 uvicorn main:app --reload
 ```
 
-Backend will run at:
-
-```text
-http://127.0.0.1:8000
-```
+Backend runs at: `http://127.0.0.1:8000`
 
 ### 5. Open API Documentation
-
-FastAPI automatically provides Swagger documentation:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -281,57 +249,42 @@ http://127.0.0.1:8000/docs
 
 ### 6. Start the Frontend
 
-Open another terminal.
-
-Move to the frontend directory:
-
 ```bash
 cd frontend
-```
-
-Run the frontend server:
-
-```bash
 python -m http.server 5500
 ```
 
-Open:
-
-```text
-http://localhost:5500
-```
+Open: `http://localhost:5500`
 
 ---
 
-## 🔄 Application Flow
+## ⚠️ Challenges Faced
 
-```text
-User
- │
- ▼
-Frontend
- │
- │ HTTP Requests
- ▼
-FastAPI Backend
- │
- ▼
-CRUD Operations
- │
- ▼
-SQLAlchemy
- │
- ▼
-SQLite Database
-```
+### SQLite to PostgreSQL Migration
+
+The project was built using SQLite initially, as suggested in the assessment. But after deploying on Railway, tickets I created would **disappear after every redeploy/restart**. I found out Railway's filesystem is **ephemeral**, so local SQLite files don't persist.
+
+**Fix:** Migrated to a Railway-managed **PostgreSQL** database. Updated `database.py` to use `DATABASE_URL` from environment variables (with SQLite as local fallback), and added `psycopg2-binary` to `requirements.txt`.
+
+**Issues faced along the way:**
+* App crashed with `ModuleNotFoundError: No module named 'psycopg'` — fixed by explicitly using the `postgresql+psycopg2://` driver in the connection string.
+* App crashed with `could not translate host name` when using Railway's private hostname — fixed by enabling **Public Networking** on the Postgres service and using its public URL instead.
+
+**Result:** Verified by creating a ticket and restarting the service — the data stayed intact, confirming persistence now works correctly.
+
+---
+
+## 📚 New Skills Learned
+
+* **Railway:** Deploying a full-stack app, connecting GitHub for auto-deploy, setting a custom start command, adding a managed PostgreSQL database, and reading logs to debug crashes.
+* **Backend (FastAPI):** Structuring a backend into database/models/schemas/CRUD files, and serving the frontend directly from FastAPI using `StaticFiles`.
+* **REST API:** Designing clean routes (`/api/tickets`, `/api/tickets/{ticket_id}`), handling query parameters for search/filter, and returning proper JSON responses.
 
 ---
 
 ## 🧪 API Testing
 
-The APIs were tested using FastAPI Swagger UI.
-
-Tested operations include:
+Tested using FastAPI Swagger UI:
 
 * Create ticket
 * Retrieve all tickets
@@ -345,18 +298,13 @@ Tested operations include:
 
 ## 📸 Screenshots
 
-
-
 ### Dashboard
-
 *Add dashboard screenshot here.*
 
 ### Create Ticket
-
 *Add create ticket screenshot here.*
 
 ### Ticket Details
-
 *Add ticket details screenshot here.*
 
 ---
@@ -364,26 +312,25 @@ Tested operations include:
 ## 🎯 Assessment Requirements Covered
 
 | Requirement          | Status |
-| -------------------- | ------- 
-| Create Tickets       | ✅      |
-| Auto Ticket ID       | ✅      |
-| Auto Timestamp       | ✅      |
-| List Tickets         | ✅      |
-| Search Tickets       | ✅      |
-| Status Filter        | ✅      |
-| Ticket Details       | ✅      |
-| Update Status        | ✅      |
-| Add Notes            | ✅      |
-| SQLite Database      | ✅      |
-| REST APIs            | ✅      |
-| Responsive Frontend  | ✅      |
-| Dashboard Statistics | ✅      |
+| --------------------- | ------ |
+| Create Tickets         | ✅ |
+| Auto Ticket ID         | ✅ |
+| Auto Timestamp         | ✅ |
+| List Tickets           | ✅ |
+| Search Tickets         | ✅ |
+| Status Filter          | ✅ |
+| Ticket Details         | ✅ |
+| Update Status          | ✅ |
+| Add Notes              | ✅ |
+| Database (SQLite/Postgres) | ✅ |
+| REST APIs              | ✅ |
+| Responsive Frontend    | ✅ |
+| Dashboard Statistics   | ✅ |
+| Cloud Deployment       | ✅ |
 
 ---
 
 ## 🔮 Future Improvements
-
-Possible future enhancements include:
 
 * User authentication and role-based access
 * Pagination for large ticket datasets
@@ -393,7 +340,6 @@ Possible future enhancements include:
 * Sentiment analysis
 * AI-generated support response suggestions
 * Advanced analytics and reporting
-* Cloud database integration
 
 ---
 
@@ -403,11 +349,9 @@ Possible future enhancements include:
 
 B.E. Artificial Intelligence & Machine Learning
 
-**GitHub:**
-https://github.com/Nikkiram435
+**GitHub:** https://github.com/Nikkiram435
 
-**LinkedIn:**
-https://www.linkedin.com/in/nikki-ram-339244289/
+**LinkedIn:** https://www.linkedin.com/in/nikki-ram-339244289/
 
 ---
 
