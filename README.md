@@ -1,4 +1,4 @@
-# 🎫 DataStraw Support CRM
+#  DataStraw Support CRM
 
 A full-stack **Customer Support Ticketing CRM System** built as part of the **DataStraw AI Data Engineering Intern Assessment**.
 
@@ -8,9 +8,9 @@ The application allows support teams to create, manage, search, filter, and upda
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🎫 Ticket Management
+###  Ticket Management
 
 * Create new support tickets
 * Automatically generate unique Ticket IDs
@@ -20,7 +20,7 @@ The application allows support teams to create, manage, search, filter, and upda
 * Update ticket status
 * Add notes/comments to tickets
 
-### 🔍 Search & Filter
+###  Search & Filter
 
 * Search tickets by:
 
@@ -35,7 +35,7 @@ The application allows support teams to create, manage, search, filter, and upda
   * In Progress
   * Closed
 
-### 📊 Dashboard
+###  Dashboard
 
 The dashboard displays:
 
@@ -44,7 +44,7 @@ The dashboard displays:
 * In Progress Tickets
 * Closed Tickets
 
-### 📱 Responsive UI
+###  Responsive UI
 
 * Clean CRM-style interface
 * Responsive design
@@ -55,7 +55,7 @@ The dashboard displays:
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 
@@ -82,7 +82,7 @@ The dashboard displays:
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```text
 datastraw-support-crm/
@@ -106,7 +106,7 @@ datastraw-support-crm/
 
 ---
 
-## 🗄️ Database Design
+##  Database Design
 
 The application uses **PostgreSQL in production** and **SQLite for local development**, with two tables.
 
@@ -135,7 +135,7 @@ The application uses **PostgreSQL in production** and **SQLite for local develop
 
 ---
 
-## 🔗 REST API
+##  REST API
 
 ### 1. Create Ticket
 
@@ -258,7 +258,7 @@ Open: `http://localhost:5500`
 
 ---
 
-## ⚠️ Challenges Faced
+##  Challenges Faced
 
 ### SQLite to PostgreSQL Migration
 
@@ -299,17 +299,19 @@ Tested using FastAPI Swagger UI:
 ## 📸 Screenshots
 
 ### Dashboard
-*Add dashboard screenshot here.*
+<img width="1857" height="856" alt="image" src="https://github.com/user-attachments/assets/a4d911dc-70d0-44dd-a515-c482e301459d" />
 
 ### Create Ticket
-*Add create ticket screenshot here.*
+<img width="1828" height="856" alt="image" src="https://github.com/user-attachments/assets/4f4704f6-f365-4cf8-9a0e-0fc8015ba5ef" />
+
 
 ### Ticket Details
-*Add ticket details screenshot here.*
+<img width="1762" height="831" alt="image" src="https://github.com/user-attachments/assets/ec5e07af-9f58-4c94-8c10-9a8af9e273ad" />
+
 
 ---
 
-## 🎯 Assessment Requirements Covered
+##  Assessment Requirements Covered
 
 | Requirement          | Status |
 | --------------------- | ------ |
@@ -330,7 +332,7 @@ Tested using FastAPI Swagger UI:
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 * User authentication and role-based access
 * Pagination for large ticket datasets
@@ -343,7 +345,7 @@ Tested using FastAPI Swagger UI:
 
 ---
 
-## 👩‍💻 Author
+##  Author
 
 **Nikki Ram**
 
