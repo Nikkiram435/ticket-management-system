@@ -2,10 +2,8 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, Literal
 from datetime import datetime
 
-
-# -----------------------------
 # Create Ticket
-# -----------------------------
+
 
 class TicketCreate(BaseModel):
     customer_name: str
@@ -14,18 +12,17 @@ class TicketCreate(BaseModel):
     description: str
 
 
-# -----------------------------
 # Update Ticket
-# -----------------------------
+
 
 class TicketUpdate(BaseModel):
     status: Optional[Literal["Open", "In Progress", "Closed"]] = None
     notes: Optional[str] = None
 
 
-# -----------------------------
+
 # Ticket List Response
-# -----------------------------
+
 
 class TicketListResponse(BaseModel):
     ticket_id: str
@@ -38,10 +35,8 @@ class TicketListResponse(BaseModel):
         from_attributes = True
 
 
-# -----------------------------
-# Note Response
-# -----------------------------
 
+# Note Response
 class NoteResponse(BaseModel):
     note_text: str
     created_at: datetime
@@ -50,9 +45,7 @@ class NoteResponse(BaseModel):
         from_attributes = True
 
 
-# -----------------------------
 # Ticket Detail Response
-# -----------------------------
 
 class TicketDetailResponse(BaseModel):
     ticket_id: str
