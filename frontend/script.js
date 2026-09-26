@@ -1,13 +1,9 @@
-// =========================================
 // API BASE URL
-// =========================================
+
 
 const API_URL = "";
 
-
-// =========================================
 // GET ELEMENTS
-// =========================================
 
 const ticketTableBody = document.getElementById("ticketTableBody");
 const emptyState = document.getElementById("emptyState");
@@ -49,10 +45,7 @@ const updateTicketBtn =
 
 let currentTicketId = null;
 
-
-// =========================================
 // LOAD TICKETS
-// =========================================
 
 async function loadTickets() {
 
@@ -106,9 +99,7 @@ async function loadTickets() {
 }
 
 
-// =========================================
 // DISPLAY TICKETS
-// =========================================
 
 function displayTickets(tickets) {
 
@@ -171,10 +162,7 @@ function displayTickets(tickets) {
 
 }
 
-
-// =========================================
 // STATUS CLASS
-// =========================================
 
 function getStatusClass(status) {
 
@@ -195,9 +183,7 @@ function getStatusClass(status) {
 }
 
 
-// =========================================
 // FORMAT DATE
-// =========================================
 
 function formatDate(dateString) {
 
@@ -216,9 +202,7 @@ function formatDate(dateString) {
 }
 
 
-// =========================================
 // LOAD STATISTICS
-// =========================================
 
 async function loadStatistics() {
 
@@ -258,10 +242,8 @@ async function loadStatistics() {
 
 }
 
-
-// =========================================
 // OPEN CREATE TICKET MODAL
-// =========================================
+
 
 openCreateModal.addEventListener(
     "click",
@@ -273,9 +255,9 @@ openCreateModal.addEventListener(
 );
 
 
-// =========================================
+
 // CLOSE CREATE MODAL
-// =========================================
+
 
 function closeCreateTicketModal() {
 
@@ -297,10 +279,8 @@ cancelCreateTicket.addEventListener(
     closeCreateTicketModal
 );
 
-
-// =========================================
 // CREATE TICKET
-// =========================================
+
 
 createTicketForm.addEventListener(
     "submit",
@@ -397,9 +377,8 @@ createTicketForm.addEventListener(
 );
 
 
-// =========================================
 // OPEN TICKET DETAILS
-// =========================================
+
 
 async function openTicketDetails(ticketId) {
 
@@ -492,9 +471,9 @@ async function openTicketDetails(ticketId) {
 }
 
 
-// =========================================
+
 // DISPLAY NOTES
-// =========================================
+
 
 function displayNotes(notes) {
 
@@ -548,9 +527,8 @@ function displayNotes(notes) {
 }
 
 
-// =========================================
 // UPDATE TICKET
-// =========================================
+
 
 updateTicketBtn.addEventListener(
     "click",
@@ -643,9 +621,9 @@ updateTicketBtn.addEventListener(
 );
 
 
-// =========================================
+
 // CLOSE DETAIL MODAL
-// =========================================
+
 
 closeDetailModal.addEventListener(
     "click",
@@ -659,9 +637,8 @@ closeDetailModal.addEventListener(
 );
 
 
-// =========================================
+
 // SEARCH
-// =========================================
 
 let searchTimeout;
 
@@ -686,9 +663,7 @@ searchInput.addEventListener(
 );
 
 
-// =========================================
 // STATUS FILTER
-// =========================================
 
 statusFilter.addEventListener(
     "change",
@@ -700,9 +675,8 @@ statusFilter.addEventListener(
 );
 
 
-// =========================================
 // CLOSE MODAL WHEN CLICKING OUTSIDE
-// =========================================
+
 
 window.addEventListener(
     "click",
@@ -727,9 +701,8 @@ window.addEventListener(
 );
 
 
-// =========================================
 // ESCAPE HTML
-// =========================================
+
 
 function escapeHtml(value) {
 
@@ -744,8 +717,8 @@ function escapeHtml(value) {
 }
 
 
-// =========================================
+
 // INITIAL LOAD
-// =========================================
+
 
 loadTickets();
